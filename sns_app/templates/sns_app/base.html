@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My SNS App{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'sns_app/css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}">My SNS App</a></h1>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'post_list' %}">投稿一覧</a></li>
+                    <li><a href="{% url 'logout' %}">ログアウト</a></li>
+                    <li><a href="{% url 'profile' %}">{{ user.username }}のプロフィール</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">ログイン</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        <!-- 各ページ固有のコンテンツがここに挿入されます -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My SNS App</p>
+    </footer>
+
+    {% block extra_scripts %}
+    <!-- 各ページ固有のスクリプトがここに挿入されます -->
+    {% endblock %}
+</body>
+</html>

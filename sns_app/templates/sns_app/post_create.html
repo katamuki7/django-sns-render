@@ -1,0 +1,12 @@
+{% extends 'sns_app/base.html' %}
+
+{% block title %}新しい投稿を作成{% endblock %}
+
+{% block content %}
+    <h1>新しい投稿を作成</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">投稿</button>
+    </form>
+{% endblock %}
